@@ -1,0 +1,85 @@
+//////////////////////////////////////////////////////// pwa app
+
+1. Проверяем версию
+ng --version (нужна 6+)
+npm i -g @angular/cli (если нужно повысить)
+
+2. Устанавливаем стартовое приложение
+ng new <<app-name>> --routing
+
+3. Конфигурируем Progressive Web Application
+ng add @angular/pwa --project "<<app-name>>"
+
+4. Если нет утилиты lighthouse (аудит для WEB)
+npm i -g lighthouse
+
+5. Выполняем Prod сборку проекта
+ng build --prod
+
+6. Запускаем сборку (сначала, если нужно - npm install http-server -g)
+http-server dist/<<app-name>>
+
+7. Проверяем на соответствие PWA (обязательно по адресу 127)
+lighthouse http://127.0.0.1:8080/index.html
+
+//////////////////////////////////////////////////////// material
+
+1. Добавляем angular/material для проекта
+ng add @angular/material @angular/cdk
+
+2. Создаем навигацию
+ng g @angular/material:material-nav --name=nav -m app
+
+2.1 Изменяем app.component.html
+см. код
+
+3. Создадим модуль для dashboard
+ng g m dashboard --routing
+
+3.1 Добавляем dashboard компонент
+ng g @angular/material:material-dashboard --name=dashboard -m dashboard
+
+3.2 Изменяем app-routing.module.ts и dashboard-routing.module.ts
+см. код
+
+//////////////////////////////////////////////////////// firebase
+
+1. Устанавливаем, если нужно firebase-tools
+npm i -g firebase-tools
+npm i -D firebase-tools (для автодеплоя)
+
+2. Логинимся в firebase
+firebase login
+
+3. Создаем новый проект в консоли firebase
+https://console.firebase.google.com
+
+4. Инициализируем проект
+firebase init
+- выбираем созданный проект firebase;
+- выбираем пробелом сервис Hosting;
+- указываем папку со сборкой приложения dist/<<app-name>>
+- переадресуем все запросы на index.html
+- отказываемся от перезаписи index.html
+
+5. Выполним публикацию приложения
+firebase deploy
+
+6. Проверяем на соответствие PWA
+lighthouse https://app-name.firebaseapp.com
+
+7. Получаем токен доступа (если нужно)
+firebase login:ci
+
+//////////////////////////////////////////////////////// CI/CD
+
+1. Регистрируемся на https://travis-ci.org/
+
+2. Создаем репозиторий с проектом в https://github.com/
+
+3. Подключаем репозиторий на странице https://travis-ci.org/account/repositories
+
+4. Добавляем файл .travis.yml
+см. код
+
+5. Делаем коммит.
