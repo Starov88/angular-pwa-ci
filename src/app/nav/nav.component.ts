@@ -25,11 +25,11 @@ export class NavComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log("nav init");
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             this.deferredPrompt = e;
-            console.log("deferredPrompt");
-            console.log(this.deferredPrompt);
+            console.log("beforeinstallprompt");
             this.A2HS();
         });
     }
@@ -50,11 +50,11 @@ export class NavComponent implements OnInit {
             this.deferredPrompt.userChoice.then((choiceResult) => {
                 if (choiceResult.outcome === 'accepted') {
                     console.log('User accepted the A2HS prompt');
+                    this.deferredPrompt = null;
                 } else {
                     console.log('User dismissed the A2HS prompt');
                     this.isA2HSConfirm = false;
                 }
-                this.deferredPrompt = null;
             });
         });
     }

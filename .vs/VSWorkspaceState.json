@@ -3,7 +3,8 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\nav"
+    "\\src\\app\\nav",
+    "\\src\\assets"
   ],
   "SelectedNode": "\\src\\app\\nav\\nav.component.ts",
   "PreviewInSolutionExplorer": false
