@@ -6,7 +6,7 @@ before_script:
 - npm i -g firebase-tools
 script:
 - npm install
-- npm run build --prod
+- ng build --prod
 - firebase use --token 1//0cKnfGwI95YoUCgYIARAAGAwSNwF-L9IrJ7faFye4V3Nxp_BP-2r07a24_UhljjhB8uxpG7Z7429WZr9FEM9Bt-mBdT6dmUxmPWA angular-pwa-ci-1ccfa
 - firebase deploy -m "build $TRAVIS_BUILD_ID" --non-interactive --token 1//0cKnfGwI95YoUCgYIARAAGAwSNwF-L9IrJ7faFye4V3Nxp_BP-2r07a24_UhljjhB8uxpG7Z7429WZr9FEM9Bt-mBdT6dmUxmPWA
 cache:
