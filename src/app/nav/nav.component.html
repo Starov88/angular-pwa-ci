@@ -25,7 +25,7 @@
     <div id="main-content">
       <div class="dbbest-img">
         <img src="/assets/dbbest.jpg" alt="DB Best" />
-        <button mat-raised-button *ngIf="!isA2HSConfirm" id="a2hs-button">Add to home screen</button>
+        <button mat-raised-button *ngIf="!isA2HSConfirm" (click)="a2hs()">Add to home screen</button>
       </div>
       <router-outlet></router-outlet>
     </div>

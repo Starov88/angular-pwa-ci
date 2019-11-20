@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
 
     private deferredPrompt: any = null;
 
-    isA2HSConfirm = false;
+    isA2HSConfirm = true;
     
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
@@ -27,36 +27,32 @@ export class NavComponent implements OnInit {
     ngOnInit(): void {
         console.log("nav init");
         window.addEventListener('beforeinstallprompt', (e) => {
+            console.log("beforeinstallprompt");
             e.preventDefault();
             this.deferredPrompt = e;
-            console.log("beforeinstallprompt");
-            this.A2HS();
+            this.isA2HSConfirm = false;
         });
     }
 
 
-    public A2HS() {
-        console.log("A2HS");
-        if (!this.deferredPrompt) {
+    public a2hs() {
+        if (!this.deferredPrompt || this.deferredPrompt == null) {
             this.isA2HSConfirm = true;
             return;
         }
-
-        document.getElementById('a2hs-button').addEventListener('click', (e) => {
-            console.log("click a2hs-button");
-            this.isA2HSConfirm = true;
-
-            this.deferredPrompt.prompt();
-            this.deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the A2HS prompt');
-                    this.deferredPrompt = null;
-                } else {
-                    console.log('User dismissed the A2HS prompt');
-                    this.isA2HSConfirm = false;
-                }
-            });
+        this.isA2HSConfirm = false;
+        
+        console.log("click a2hs-button");
+        this.isA2HSConfirm = true;
+        this.deferredPrompt.prompt();
+        this.deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the A2HS prompt');
+                this.deferredPrompt = null;
+            } else {
+                console.log('User dismissed the A2HS prompt');
+                this.isA2HSConfirm = false;
+            }
         });
     }
-
 }
